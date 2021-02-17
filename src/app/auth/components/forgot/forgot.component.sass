@@ -11,22 +11,16 @@ $panels-height-xl: 325px
 
 .cards-container
     margin-bottom: 4em
-    @media (min-width: $x-small-devices) and (max-width: $small-devices)
-        flex-direction: column!important
-        .welcome-panel
-            order: 2
-        .form-panel
-            order: 1
-        .tutorials-panel
-            order: 3
+  
 
-    .welcome-panel, .form-panel, .tutorials-panel
+    .form-panel
         width: calc(100% / 3)
         mat-card
             box-sizing: content-box!important
+            height: 18.21rem
             height: calc(#{$panels-height} - 32px)
-            @media (min-width: $larger-devices) and (max-width: $x-larger-devices)
-                height: calc(#{$panels-height-xl} - 32px)
+            // @media (min-width: $larger-devices) and (max-width: $x-larger-devices)
+            //     height: calc(#{$panels-height-xl} - 32px)
 
             @media (min-width: $x-small-devices) and (max-width: $larger-devices)
                 height: auto
@@ -61,8 +55,7 @@ $panels-height-xl: 325px
 
 
 .logo
-    margin-top: 4em
-    margin-bottom: 4em
+    margin-bottom: 2em
     @media (min-width: $x-small-devices) and (max-width: $small-devices)
         margin-bottom: 1em
     .icon-login
