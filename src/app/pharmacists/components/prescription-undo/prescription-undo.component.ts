@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Input, Injectable, EventEmitter, Output }
 import { timer, Subscription } from 'rxjs';
 import * as moment from 'moment';
 import {showCancelDispense, hideTimer} from '@animations/animations.template';
+import { AuthService } from '@auth/services/auth.service';
 
 @Injectable()
 export class CounterDownService {
@@ -33,7 +34,7 @@ export class PrescriptionUndoComponent implements OnInit, OnDestroy {
   counter: number;
   showtimes: boolean = true;
 
-  constructor(private counterDownService: CounterDownService) {}
+  constructor(private counterDownService: CounterDownService, private authService: AuthService) {}
 
   ngOnInit() {
     this.counter = this.getTimeeDiffInSeconds();
@@ -64,6 +65,10 @@ export class PrescriptionUndoComponent implements OnInit, OnDestroy {
     const now = moment();
     const diff = dispensedAt.diff((now), 'seconds');
     return diff;
+  }
+
+  isAdmin() {
+    this.authService.isAdminRole();
   }
 
 }

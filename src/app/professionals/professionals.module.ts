@@ -26,11 +26,13 @@ import {MatSortModule} from '@angular/material/sort';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { PrescriptionsListComponent } from './components/prescriptions-list/prescriptions-list.component';
+import { SupplyListComponent } from './components/supply-list/supply-list.component';
 
 @NgModule({
   declarations: [
     routingComponents,
     PrescriptionsListComponent,
+    SupplyListComponent
   ],
   imports: [
     CommonModule,

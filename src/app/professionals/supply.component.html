@@ -1,0 +1,169 @@
+<div class="custom-tab-link-bar">
+  <button mat-flat-button (click)="showForm()">Nuevo Producto</button>
+  <button mat-flat-button (click)="showList()">Listar Productos</button>
+</div>
+<div class="link-bar-indicator-container">
+  <div class="indicator" [@stepLink]="isFormShown ? 'left' : 'right'"></div>
+</div>
+ 
+<div class="pf-container">
+  <div fxLayout="row" fxLayoutAlign="space-evenly start" fxLayoutGap="20px" class="cards-container" fxFill
+    [@step]="isFormShown ? 'left' : 'right'">
+
+    <div class="prescription-panel">
+       <mat-card fxLayout="column" fxLayoutAlign="space-between" class="new-prescription">
+        <div fxFlex="100" fxLayout="column" fxLayoutAlign="start">
+          <mat-card-title>
+            <h2 fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+              <mat-icon>{{ isEdit ? "edit" : "gesture" }}</mat-icon>
+              <span>{{ isEdit ? "Editar Producto" : "Registrar nuevo producto" }}</span>
+            </h2>
+          </mat-card-title>
+
+          <mat-card-content>
+            <form [formGroup]="supplyForm" #supplyNgForm="ngForm" fxLayout="column" (ngSubmit)="onSubmitSupplyForm(supplyNgForm)">
+              <div class="sub-container"
+                fxLayout="column"
+                fxLayout.xs="column"
+                fxLayoutAlign="center"
+                fxLayoutGap="10px"
+                fxLayoutGap.xs="0">
+
+                <div class="first-block">
+                <!-- Fecha de receta -->
+                  <div formGroupName="supply" class="supply-container" fxLayout="row" fxLayoutGap="10px">
+                    <div class="st-bk-patient">
+                      <!-- Dni -->
+                      <mat-form-field appearance="fill">
+                        <mat-label>Nombre</mat-label>
+                        <input type="text"
+                          tabIndex="1"
+                          #dni
+                          placeholder="Nombre"
+                          matInput
+                          required
+                          formControlName="name">
+                        
+                          <mat-error *ngIf="name.errors?.required">
+                          Debe ingresar principio nombre
+                            </mat-error> 
+
+                      </mat-form-field>
+
+                      <!-- Lastname -->
+                      <mat-form-field appearance="fill">
+                        <mat-label>Principio activo</mat-label>
+                        <input type="text"
+                          tabIndex="3"
+                          placeholder="Principio activo"
+                          matInput
+                          required
+                          formControlName="activePrinciple">
+
+                        <mat-error *ngIf="activePrinciple.errors?.required">
+                          Debe ingresar principio activo
+                          </mat-error>
+                      </mat-form-field>
+
+                    <!-- </div>
+                    <div class="nd-bk-patient"> -->
+                      <!-- sex -->
+                      <!-- Lastname -->
+                      <mat-form-field appearance="fill">
+                        <mat-label>Pharma Form</mat-label>
+                        <input type="text"
+                          tabIndex="3"
+                          placeholder="Pharma Form "
+                          matInput
+                          required
+                          formControlName="pharmaceutical_form">
+
+                        <mat-error *ngIf="pharmaceutical_form.errors?.required">
+                          Debe ingresar valor
+                          </mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="fill">
+                        <mat-label>Power</mat-label>
+                        <input type="text"
+                        tabIndex="4"
+                          placeholder="Power"
+                          matInput
+                          required
+                          formControlName="power">
+      
+                        <mat-error *ngIf="power.errors?.required">
+                          Debe ingresar valor
+                        </mat-error>
+                      </mat-form-field>
+      
+                      <mat-form-field appearance="fill">
+                        <mat-label>Unidad</mat-label>
+                        <input type="text"
+                          tabIndex="4"
+                          placeholder="unity"
+                          matInput
+                          required
+                          formControlName="unity">
+      
+                        <mat-error *ngIf="unity.errors?.required">
+                          Debe ingresar unidad
+                        </mat-error>
+                      </mat-form-field>
+      
+                      <mat-form-field appearance="fill">
+                        <mat-label>Primera presentación</mat-label>
+                        <input type="text"
+                          tabIndex="4"
+                          placeholder="Primera presentación"
+                          matInput
+                          required
+                          formControlName="firstPresentation">
+      
+                        <mat-error *ngIf="unity.errors?.required">
+                          Debe ingresar primera presentación
+                        </mat-error>
+                      </mat-form-field>
+      
+                      <mat-form-field appearance="fill">
+                        <mat-label>Segunda presentación</mat-label>
+                        <input type="text"
+                          tabIndex="4"
+                          placeholder="Segunda presentación"
+                          matInput
+                          formControlName="secondPresentation">
+      
+                      </mat-form-field>
+                    </div>
+                    
+                  </div>
+                  
+                </div>
+              </div>
+
+              <div fxLayout="row" fxLayoutAlign="center">
+                <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px" fxFlex="100%">
+                  <button mat-raised-button type="button" *ngIf="!isSubmit  && isEdit" fxFlex="100%" (click)="clearForm(supplyNgForm)">
+                    Cancelar
+                  </button>
+
+                  <button mat-raised-button color="primary" *ngIf="!isSubmit" type="submit" fxFlex="100%">
+                    {{ !isEdit ? 'Crear' : 'Guardar' }}
+                  </button>
+                </div>
+
+                <mat-spinner [color]="spinnerColor" [diameter]="spinnerDiameter" *ngIf="isSubmit"></mat-spinner>
+              </div>
+            </form>
+          </mat-card-content>
+        </div>
+      </mat-card>
+    </div>
+
+
+    <div class="my-prescriptions-panel">
+      <app-supply-list (editSupplyEvent)="editSupply($event)"></app-supply-list>
+    </div>
+
+  </div>
+</div>

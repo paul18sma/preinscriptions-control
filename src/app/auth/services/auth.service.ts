@@ -122,6 +122,10 @@ export class AuthService {
     return roles.some( (role: string) => role === 'professional');
   }
 
+  isAdminRole(): boolean {
+    const roles: string[] = this.getLoggedRole();
+    return roles.some( (role: string) => role === 'admin');
+  }
   getLoggedRole(): string[]{
     const payLoadJwt: any = this.getDecodeJwt();
     return payLoadJwt.rl;

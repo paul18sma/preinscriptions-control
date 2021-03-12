@@ -1,0 +1,47 @@
+<mat-card fxLayout="column" fxLayoutAlign="space-between">
+  <mat-card-title>
+    <h2 fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px"><mat-icon></mat-icon> <span>Productos</span></h2>
+  </mat-card-title>
+  <mat-card-content>
+
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar nombre">
+    </mat-form-field>
+
+    <div class="container mat-elevation-z8">
+      <div class="table-container" *ngIf="!loadingPrescriptions">
+        <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+
+          <!-- Paciente Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+            <td mat-cell *matCellDef="let element" class='title-cell' test data-label='Nombre'> {{ element.name.toUpperCase() }} </td>
+          </ng-container>
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Acción </th>
+            <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation()" class="actions-cell">
+              <button mat-menu-item type="button" (click)="editSupply(element)" matTooltip="Editar" matTooltipPosition="above">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row [@rowsAnimation]="" *matRowDef="let row; columns: displayedColumns;"
+            class="element-row"
+            [class.expanded-row]="expandedElement === row"
+            (click)="expandedElement = expandedElement === row ? null : row">
+          </tr>
+          <!-- <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr> -->
+
+        </table>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center" class="loading-prescriptions" *ngIf="loadingPrescriptions">
+        <mat-spinner matSuffix color="primary" [diameter]="40"></mat-spinner>
+      </div>
+      <mat-paginator [pageSizeOptions]="[10, 20, 30]"></mat-paginator>
+    </div>
+
+
+  </mat-card-content>
+</mat-card>
