@@ -164,7 +164,4 @@ export class PrescriptionListComponent implements OnInit, AfterContentInit {
     return false
   }
 
-  isAdmin() {
-    return this.authService.isAdminRole();
-  }
 }

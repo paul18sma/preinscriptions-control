@@ -33,6 +33,7 @@ export class PrescriptionUndoComponent implements OnInit, OnDestroy {
   typeTime: string;
   counter: number;
   showtimes: boolean = true;
+  isAdmin: boolean = false;
 
   constructor(private counterDownService: CounterDownService, private authService: AuthService) {}
 
@@ -48,6 +49,8 @@ export class PrescriptionUndoComponent implements OnInit, OnDestroy {
         if(this.counter < 3600) this.typeTime = 'm';
         if(this.counter < 60) this.typeTime = 's';
       }));
+    
+      this.isAdmin = this.authService.isAdminRole();
   }
 
   ngOnDestroy() {
@@ -66,9 +69,4 @@ export class PrescriptionUndoComponent implements OnInit, OnDestroy {
     const diff = dispensedAt.diff((now), 'seconds');
     return diff;
   }
-
-  isAdmin() {
-    this.authService.isAdminRole();
-  }
-
 }
