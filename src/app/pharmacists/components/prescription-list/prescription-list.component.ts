@@ -31,6 +31,7 @@ export class PrescriptionListComponent implements OnInit, AfterContentInit {
   loadingPrescriptions: boolean;
   lapseTime: number = 2; // lapse of time that a dispensed prescription can been undo action, and put it back as "pendiente"
   pharmacistId: string;
+  isAdmin: boolean = false;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -58,6 +59,7 @@ export class PrescriptionListComponent implements OnInit, AfterContentInit {
       this.loadingPrescriptions = false;
     });
     this.pharmacistId = this.authService.getLoggedUserId();
+    this.isAdmin = this.authService.isAdminRole();
   }
 
   ngAfterContentInit(){

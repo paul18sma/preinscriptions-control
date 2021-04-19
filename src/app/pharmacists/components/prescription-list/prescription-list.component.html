@@ -68,7 +68,7 @@
                 <button mat-menu-item type="button" *ngIf="canDispense(element)" (click)="dispense(element)" matTooltip="Dispensar" matTooltipPosition="above">
                   <mat-icon>done_outline</mat-icon>
                 </button>
-                <app-prescription-undo *ngIf="element.status === 'Dispensada'" [dispensedAt]="element.dispensedAt" [prescriptionId]="element._id" [lapseTime]="lapseTime" (cancelDispenseEvent)="cancelDispense($event)"></app-prescription-undo>
+                <app-prescription-undo *ngIf="element.status === 'Dispensada' && (element.dispensedBy?.userId === pharmacistId || isAdmin)" [dispensedAt]="element.dispensedAt" [prescriptionId]="element._id" [lapseTime]="lapseTime" (cancelDispenseEvent)="cancelDispense($event)"></app-prescription-undo>
               </div>
             </td>
           </ng-container>
