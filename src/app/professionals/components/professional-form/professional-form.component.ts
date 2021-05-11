@@ -124,7 +124,7 @@ export class ProfessionalFormComponent implements OnInit {
       patient: this.fBuilder.group({
         dni: ['', [
           Validators.required,
-          Validators.minLength(8),
+          Validators.minLength(7),
           Validators.pattern("^[0-9]*$")
         ]],
         lastName: ['', [
@@ -174,7 +174,8 @@ export class ProfessionalFormComponent implements OnInit {
   }
 
   getPatientByDni(dniValue: string | null):void{
-    if(dniValue !== null && dniValue.length == 8){
+    if(dniValue !== null && (dniValue.length == 7 || dniValue.length == 8)){
+      console.log("DBI");
       this.dniShowSpinner = true;
       this.apiPatients.getPatientByDni(dniValue).subscribe(
         res => {
