@@ -55,7 +55,7 @@ export class PharmacistsFormComponent implements OnInit {
       values => {
         const digestDate = typeof(values.dateFilter) !== 'undefined' && values.dateFilter != null && values.dateFilter !== '' ? values.dateFilter.format('YYYY-MM-DD') : '';
 
-        if(typeof(values.patient_dni) !== 'undefined' && values.patient_dni.length === 8){
+        if(typeof(values.patient_dni) !== 'undefined' && values.patient_dni.length === 7){
 
           this.dniShowSpinner = this.lastDni != values.patient_dni;
           this.dateShowSpinner = this.lastDate != digestDate;
@@ -91,7 +91,7 @@ export class PharmacistsFormComponent implements OnInit {
     this.prescriptionForm = this.fBuilder.group({
       patient_dni: ['', [
         Validators.required,
-        Validators.minLength(8)
+        Validators.minLength(7)
       ]],
       dateFilter: ['', [
       ]],
