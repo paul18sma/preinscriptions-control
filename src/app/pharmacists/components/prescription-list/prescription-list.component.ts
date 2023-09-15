@@ -141,7 +141,7 @@ export class PrescriptionListComponent implements OnInit, AfterContentInit {
   }
 
   canDispense(prescription: Prescriptions): boolean {
-    return prescription.status === "Pendiente";
+    return (prescription.status === "Pendiente" && moment() >= moment(prescription.date));
   }
 
   printPrescription(prescription: Prescriptions) {
